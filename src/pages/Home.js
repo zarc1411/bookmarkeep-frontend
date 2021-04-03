@@ -8,7 +8,7 @@ import {
   Text,
   SimpleGrid,
 } from '@chakra-ui/react';
-import CategoryButton from '../components/CategoryButton';
+import CategoryButton from '../components/category/CategoryButton';
 const Home = () => {
   return (
     <VStack mx={['10%', '13%', '16%', '20%']} overflowY="hidden">

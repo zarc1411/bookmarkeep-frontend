@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Box, Spacer } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-import AuthenticationButton from './AuthenticationButton';
+import AuthenticationButton from '../components/auth/AuthenticationButton';
 const Header = () => {
   return (
     <Flex marginTop={5} mx={['10%', '13%', '16%', '20%']}>

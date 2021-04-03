@@ -19,8 +19,7 @@ const CategoryButton = () => {
             padding={7}
             marginBottom={10}
             fontFamily="Josefin Sans"
-            _
-            hover={{
+            _hover={{
               backgroundColor: 'purple.500',
             }}
           >

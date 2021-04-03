@@ -1,21 +1,48 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3001/';
+const baseUrl = 'https://still-lake-80469.herokuapp.com';
 
-const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request;
+const checkIfUsernameExists = username => {
+  const request = axios.get(`${baseUrl}/${username}`);
+  return request.then(response => response);
 };
 
-const myJson = await getAll();
-console.log(myJson);
-const postUser = () => {
-  const request = axios
-    .post('http://localhost:3001/')
-    .then(response => console.log(response));
+const saveUsernameToDatabase = userNickname => {
+  const userNameObject = {
+    username: userNickname,
+    data: [],
+  };
+
+  const request = axios.post(`${baseUrl}/${userNickname}`, userNameObject);
+  return request.then(response => response);
+};
+
+const getCategories = username => {
+  const request = axios.get(`${baseUrl}/${username}/categories`);
+  return request.then(response => response.data);
+};
+
+const addCategory = (username, categoryName) => {
+  const categoryObject = {
+    category: categoryName,
+    bookmarks: [],
+  };
+  const request = axios.post(
+    `${baseUrl}/${username}/categories`,
+    categoryObject
+  );
+  return request.then(response => response);
+};
+
+const deleteCategory = (username, categoryName) => {
+  const request = axios.delete(`${baseUrl}/${username}/${categoryName}`);
+  return request.then(response => response);
 };
 
 export default {
-  getAll: getAll,
-  postUser: postUser,
+  getCategories: getCategories,
+  checkIfUsernameExists: checkIfUsernameExists,
+  saveUsernameToDatabase: saveUsernameToDatabase,
+  addCategory: addCategory,
+  deleteCategory: deleteCategory,
 };
