@@ -37,11 +37,10 @@ const BookmarkForm = ({ categoryToSearch, setBookmarksArray }) => {
         );
       })
       .then(response => {
-        // categoryObject.bookmarks = response.data;
         setBookmarksArray(response.data);
       })
       .catch(error => console.log(error));
-
+    setBookmarkUrl('');
     onClose();
   };
   return (

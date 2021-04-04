@@ -19,7 +19,6 @@ const App = () => {
       bookMarkService
         .saveUsernameToDatabase(user.nickname)
         .then(result => {
-          console.log('New user registered');
           setUsernameSaved(true);
           setCategoryArrayReceived(true);
         })

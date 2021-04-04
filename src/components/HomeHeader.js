@@ -7,7 +7,7 @@ const HomeHeader = () => {
   if (isAuthenticated) {
     return (
       <Box fontSize="6vh" fontFamily="Raleway" marginTop={10}>
-        Hi {user.name}!
+        Hi {user.given_name}!
       </Box>
     );
   } else return <></>;

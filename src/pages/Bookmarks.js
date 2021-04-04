@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router';
-import { Stack, SimpleGrid, Box, Input, Flex, Spacer } from '@chakra-ui/react';
+import {
+  Stack,
+  SimpleGrid,
+  Box,
+  Input,
+  Flex,
+  Spacer,
+  Skeleton,
+} from '@chakra-ui/react';
 import BookmarkForm from '../components/bookmark/BookmarkForm';
 import Bookmark from '../components/bookmark/Bookmark';
 import bookMarkService from '../services/bookmarks';
@@ -10,23 +18,31 @@ const Bookmarks = ({ categoryArray }) => {
   const categoryToSearch = url.split('/')[2];
   const [bookmarksArray, setBookmarksArray] = useState([]);
   const [bookmarkSearch, setBookmarkSearch] = useState('');
+  const [bookmarkArrayReceived, setBookmarkArrayReceived] = useState(false);
   const { user } = useAuth0();
   useEffect(() => {
     bookMarkService
       .getBookmarks(user.nickname, categoryToSearch)
-      .then(response => setBookmarksArray(response.data));
+      .then(response => {
+        setBookmarksArray(response.data);
+        setBookmarkArrayReceived(true);
+      });
   }, []);
 
   const handleChange = event => {
     setBookmarkSearch(event.target.value);
   };
-  console.log('bookmarks ', bookmarksArray);
-  console.log(typeof bookmarkSearch);
   const bookmarksToShow = bookmarksArray.filter(currentBookmarkObject =>
     currentBookmarkObject.title
       .toLowerCase()
       .includes(bookmarkSearch.toLowerCase())
   );
+
+  if (!bookmarkArrayReceived) {
+    return (
+      <Skeleton mx={['10%', '13%', '16%', '20%']} height="60vh"></Skeleton>
+    );
+  }
   return (
     <>
       {' '}
@@ -57,7 +73,6 @@ const Bookmarks = ({ categoryArray }) => {
                   title={currentBookmark.title}
                   image={currentBookmark.image}
                   url={currentBookmark.url}
-                  bookmarksArray={bookmarksArray}
                   setBookmarksArray={setBookmarksArray}
                   categoryToSearch={categoryToSearch}
                 />

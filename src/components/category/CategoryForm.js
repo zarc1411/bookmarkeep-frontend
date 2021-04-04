@@ -25,6 +25,7 @@ const CategoryForm = ({ categoryArray, setCategoryArray }) => {
     bookMarkService.addCategory(user.nickname, categoryName).then(response => {
       setCategoryArray(response.data);
     });
+    setCategoryName('');
     onClose();
   };
   return (
