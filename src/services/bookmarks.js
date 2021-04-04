@@ -47,7 +47,7 @@ const getBookmarks = (username, categoryName) => {
 const getLinkPreview = query => {
   const key = process.env.REACT_APP_LINKPREVIEW_KEY;
   const request = axios.get(
-    `http://api.linkpreview.net/?key=${key}&q=${query}`
+    `https://api.linkpreview.net/?key=${key}&q=${query}`
   );
   return request.then(response => response);
 };
