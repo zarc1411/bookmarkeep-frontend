@@ -9,11 +9,14 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import CategoryButton from '../components/category/CategoryButton';
+import HomeHeader from '../components/HomeHeader';
 const Home = () => {
   return (
     <VStack mx={['10%', '13%', '16%', '20%']} overflowY="hidden">
+      <HomeHeader />
+      <CategoryButton />
       <SimpleGrid
-        marginTop="5em"
+        marginTop={10}
         minChildWidth="10em"
         spacing="2em"
         textAlign="center"
@@ -24,16 +27,14 @@ const Home = () => {
         </Box>
         <VStack textAlign="center" py={15} px={2} boxSize="100%">
           <Heading size="2xl" my={[5, 10]} fontFamily="Josefin Sans">
-            Read the best articles and watch the best videos.
+            Bookmark Manager
           </Heading>
           <Text size="2xl" alignSelf="end" fontFamily="Josefin Sans">
-            LinksForYou is a clean and organized site that contains links to
-            engrossing articles and videos of various topics like Programming,
-            Science, Career, Health and much more!
+            Bookmarkeep is a clean and organized site that helps you organise
+            your bookmarks with ease.
           </Text>
         </VStack>
       </SimpleGrid>
-      <CategoryButton />
     </VStack>
   );
 };

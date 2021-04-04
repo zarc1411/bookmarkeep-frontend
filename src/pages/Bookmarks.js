@@ -48,14 +48,18 @@ const Bookmarks = ({ categoryArray }) => {
         </Flex>
 
         <Box>
-          <SimpleGrid columns={[1, null, 2, 3]} gap={10} padding="2vh">
+          <SimpleGrid columns={[1, null, 2, 3]} gap={10}>
             {bookmarksToShow.map(currentBookmark => {
+              console.log(currentBookmark.title);
               return (
                 <Bookmark
                   key={currentBookmark._id}
                   title={currentBookmark.title}
                   image={currentBookmark.image}
                   url={currentBookmark.url}
+                  bookmarksArray={bookmarksArray}
+                  setBookmarksArray={setBookmarksArray}
+                  categoryToSearch={categoryToSearch}
                 />
               );
             })}

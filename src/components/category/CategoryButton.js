@@ -17,7 +17,7 @@ const CategoryButton = () => {
             color="white"
             fontSize="1.5em"
             padding={7}
-            marginBottom={10}
+            marginTop={5}
             fontFamily="Josefin Sans"
             _hover={{
               backgroundColor: 'purple.500',

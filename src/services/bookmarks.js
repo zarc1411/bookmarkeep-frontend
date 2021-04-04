@@ -61,6 +61,13 @@ const addBookmark = (username, categoryName, bookmarkObject) => {
   return request.then(response => response);
 };
 
+const deleteBookmark = (username, categoryName, title) => {
+  const encodedTitle = encodeURIComponent(title);
+  const request = axios.delete(
+    `${baseUrl}/${username}/${categoryName}/bookmarks/${encodedTitle}`
+  );
+  return request.then(response => response);
+};
 export default {
   getCategories: getCategories,
   checkIfUsernameExists: checkIfUsernameExists,
@@ -70,4 +77,5 @@ export default {
   getBookmarks: getBookmarks,
   getLinkPreview: getLinkPreview,
   addBookmark: addBookmark,
+  deleteBookmark: deleteBookmark,
 };

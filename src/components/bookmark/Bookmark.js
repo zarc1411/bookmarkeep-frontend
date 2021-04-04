@@ -1,14 +1,32 @@
-import { SimpleGrid, Box, Image, Text } from '@chakra-ui/react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { SimpleGrid, Box, Image, Text, Button, Link } from '@chakra-ui/react';
 import React from 'react';
-
-const Bookmark = ({ title, image, url }) => {
+import bookMarkService from '../../services/bookmarks';
+const Bookmark = ({
+  title,
+  image,
+  url,
+  bookmarksArray,
+  setBookmarksArray,
+  categoryToSearch,
+}) => {
+  const { user } = useAuth0();
+  const deleteBookmarkFromDatabase = () => {
+    console.log(title);
+    bookMarkService
+      .deleteBookmark(user.nickname, categoryToSearch, title)
+      .then(response => setBookmarksArray(response.data));
+  };
   return (
     <>
-      <SimpleGrid templateRows="4fr 1fr">
-        <Box>
+      <SimpleGrid placeItems="center">
+        <SimpleGrid columns={1}>
           <Image src={image} />
-          <Text>{title}</Text>
-        </Box>
+          <Link href={url} target="_blank">
+            {title}
+          </Link>
+          <Button onClick={deleteBookmarkFromDatabase}>Delete</Button>
+        </SimpleGrid>
       </SimpleGrid>
     </>
   );
