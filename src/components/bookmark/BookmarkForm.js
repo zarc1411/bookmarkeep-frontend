@@ -13,18 +13,35 @@ import {
 } from '@chakra-ui/modal';
 import React, { useState } from 'react';
 import bookMarkService from '../../services/bookmarks';
-
-const CategoryForm = ({ categoryArray, setCategoryArray }) => {
+const BookmarkForm = ({ categoryToSearch, setBookmarksArray }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useAuth0();
-  const [categoryName, setCategoryName] = useState('');
+  const [bookmarkUrl, setBookmarkUrl] = useState('');
   const handleChange = event => {
-    setCategoryName(event.target.value);
+    setBookmarkUrl(event.target.value);
   };
-  const saveCategoryToDatabase = () => {
-    bookMarkService.addCategory(user.nickname, categoryName).then(response => {
-      setCategoryArray(response.data);
-    });
+
+  const saveBookmarkToDatabase = () => {
+    bookMarkService
+      .getLinkPreview(bookmarkUrl)
+      .then(response => {
+        const bookmarkObject = {
+          title: response.data.title,
+          url: response.data.url,
+          image: response.data.image,
+        };
+        return bookMarkService.addBookmark(
+          user.nickname,
+          categoryToSearch,
+          bookmarkObject
+        );
+      })
+      .then(response => {
+        // categoryObject.bookmarks = response.data;
+        setBookmarksArray(response.data);
+      })
+      .catch(error => console.log(error));
+
     onClose();
   };
   return (
@@ -45,17 +62,17 @@ const CategoryForm = ({ categoryArray, setCategoryArray }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader alignSelf="center">Enter category name</ModalHeader>
+          <ModalHeader alignSelf="center">Paste link</ModalHeader>
           <ModalCloseButton />
           <Input
-            value={categoryName}
+            value={bookmarkUrl}
             onChange={handleChange}
             width="80%"
             alignSelf="center"
           />{' '}
           <Center>
             <ModalFooter>
-              <Button onClick={saveCategoryToDatabase}>Save</Button>
+              <Button onClick={saveBookmarkToDatabase}>Save</Button>
             </ModalFooter>
           </Center>
         </ModalContent>
@@ -64,4 +81,4 @@ const CategoryForm = ({ categoryArray, setCategoryArray }) => {
   );
 };
 
-export default CategoryForm;
+export default BookmarkForm;

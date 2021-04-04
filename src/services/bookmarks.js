@@ -39,10 +39,35 @@ const deleteCategory = (username, categoryName) => {
   return request.then(response => response);
 };
 
+const getBookmarks = (username, categoryName) => {
+  const request = axios.get(`${baseUrl}/${username}/${categoryName}/bookmarks`);
+  return request.then(response => response);
+};
+
+const getLinkPreview = query => {
+  const key = process.env.REACT_APP_LINKPREVIEW_KEY;
+  const request = axios.get(
+    `http://api.linkpreview.net/?key=${key}&q=${query}`
+  );
+  return request.then(response => response);
+};
+
+const addBookmark = (username, categoryName, bookmarkObject) => {
+  const request = axios.post(
+    `${baseUrl}/${username}/${categoryName}/bookmarks`,
+    bookmarkObject
+  );
+
+  return request.then(response => response);
+};
+
 export default {
   getCategories: getCategories,
   checkIfUsernameExists: checkIfUsernameExists,
   saveUsernameToDatabase: saveUsernameToDatabase,
   addCategory: addCategory,
   deleteCategory: deleteCategory,
+  getBookmarks: getBookmarks,
+  getLinkPreview: getLinkPreview,
+  addBookmark: addBookmark,
 };
