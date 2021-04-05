@@ -8,6 +8,7 @@ import {
   Skeleton,
   Spacer,
   Flex,
+  Text,
 } from '@chakra-ui/react';
 import Category from '../components/category/Category';
 import CategoryForm from '../components/category/CategoryForm';
@@ -35,6 +36,9 @@ const Categories = ({
     }
     return (
       <Stack marginTop={5} mx={['10%', '13%', '16%', '20%']}>
+        <Text fontFamily="Raleway" fontSize="3vh" textAlign="center">
+          Categories
+        </Text>
         <Flex>
           <Input
             alignSelf="center"
