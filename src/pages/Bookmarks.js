@@ -8,6 +8,7 @@ import {
   Flex,
   Spacer,
   Skeleton,
+  Text,
 } from '@chakra-ui/react';
 import BookmarkForm from '../components/bookmark/BookmarkForm';
 import Bookmark from '../components/bookmark/Bookmark';
@@ -47,6 +48,9 @@ const Bookmarks = ({ categoryArray }) => {
     <>
       {' '}
       <Stack marginTop={5} mx={['10%', '13%', '16%', '20%']}>
+        <Text fontFamily="Raleway" fontSize="3vh" textAlign="center">
+          {categoryToSearch}
+        </Text>
         <Flex>
           <Input
             alignSelf="center"

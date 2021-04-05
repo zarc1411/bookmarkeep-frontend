@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, SimpleGrid, Text } from '@chakra-ui/react';
+import { Center, IconButton, SimpleGrid, Spacer, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '../DeleteIcon';
@@ -18,7 +18,7 @@ const Category = ({ username, category, setCategoryArray }) => {
       <SimpleGrid
         color="#c37df8"
         height="15vh"
-        templateRows="1fr 3fr"
+        templateRows="1fr 1fr 1fr"
         boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
         fontFamily="Raleway"
         fontSize="2vh"
@@ -31,11 +31,12 @@ const Category = ({ username, category, setCategoryArray }) => {
           onClick={deleteCategoryFromDatabase}
         />
         <Link to={`/${username}/${category}/bookmarks`}>
-          <Text textAlign="center" paddingTop={[2, 4]}>
+          <Text textAlign="center" alignSelf="center" paddingTop={[2, 4]}>
             {' '}
             {category}
           </Text>
         </Link>
+        <Spacer />
       </SimpleGrid>
     </motion.div>
   );
