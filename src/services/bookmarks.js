@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const baseUrl = 'https://still-lake-80469.herokuapp.com';
 
+const pingTheServer = () => {
+  const request = axios.get(baseUrl);
+  return request.then(response => response);
+};
+
 const checkIfUsernameExists = username => {
   const request = axios.get(`${baseUrl}/${username}`);
   return request.then(response => response);
@@ -69,6 +74,7 @@ const deleteBookmark = (username, categoryName, title) => {
   return request.then(response => response);
 };
 export default {
+  pingTheServer: pingTheServer,
   getCategories: getCategories,
   checkIfUsernameExists: checkIfUsernameExists,
   saveUsernameToDatabase: saveUsernameToDatabase,

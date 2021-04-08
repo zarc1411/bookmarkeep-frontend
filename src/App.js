@@ -10,6 +10,7 @@ import Bookmarks from './pages/Bookmarks';
 import bookMarkService from './services/bookmarks';
 
 const App = () => {
+  bookMarkService.pingTheServer().then(result => console.log(result));
   const { isLoading, user } = useAuth0();
   const [categoryArray, setCategoryArray] = useState([]);
   const [usernameSaved, setUsernameSaved] = useState(false);
