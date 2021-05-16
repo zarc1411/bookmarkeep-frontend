@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { SimpleGrid, Image, Button, Link, Center } from '@chakra-ui/react';
+import { SimpleGrid, Image, Button, Link, Center, Drawer, useDisclosure, DrawerOverlay, DrawerContent, DrawerBody } from '@chakra-ui/react';
 import React from 'react';
 import bookMarkService from '../../services/bookmarks';
 const Bookmark = ({
@@ -10,6 +10,7 @@ const Bookmark = ({
   categoryToSearch,
 }) => {
   const { user } = useAuth0();
+  const {isOpen , onOpen, onClose} = useDisclosure();
   const deleteBookmarkFromDatabase = () => {
     bookMarkService
       .deleteBookmark(user.nickname, categoryToSearch, title)
@@ -25,9 +26,21 @@ const Bookmark = ({
               {title}
             </Link>
           </Center>
-          <Button onClick={deleteBookmarkFromDatabase}>Delete</Button>
+          <SimpleGrid columns={2}>          
+            <Button onClick={onOpen}>View</Button>
+            <Button onClick={deleteBookmarkFromDatabase}>Delete</Button>
+          </SimpleGrid>
         </SimpleGrid>
       </SimpleGrid>
+
+      <Drawer onClose={onClose} isOpen={isOpen} size="xl">
+        <DrawerOverlay/>
+        <DrawerContent>
+          <DrawerBody>
+            <iframe src={url} width="100%" height="100%"></iframe>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
